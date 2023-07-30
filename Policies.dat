@@ -1,5 +1,12 @@
-
-1004, 2023-07-25, Bob, Green, 23 Pine Pl, Gander, NL, A1A2W2, 709-566-7687, 2, Y, Y, Y, Monthly, 1794.75, 262.99, 2023-08-01
-1005, 2023-07-25, Lisa , Daly, 345 Water St, Deer Lake, NL, A1A2S2, 709-554-9898, 3, Y, Y, Y, Full, 2518.50, 0.00, 2023-08-01
-1006, 2023-07-25, Bill, Andrews, 22 Maple St, Gander, NL, A1B2W2, 709-554-3322, 1, Y, Y, Y, Monthly, 1143.00, 169.31, 2023-08-01
-1007, 2023-07-25, Bill, Bob, 22 Maple Dr, Gander, NL, A1A3D3, 709-567-0087, 3, Y, Y, Y, Monthly, 2474.50, 360.71, 2023-08-01
+1034, 2023-07-29, Bob, Green, 22 Main Rd, Gander, NL, A1B3E3, 709-565-6767, 2, YN, YN, YN, Monthly, 1794.75, 262.99, 2023-08-01
+1035, 2023-07-29, Barb, Walsh, 879 Water St, St Johns, NL, A1A2S2, 709-754-6573, 1, Y, Y, Y, Full, 1143.00, 0.00, 2023-08-01
+1036, 2023-07-29, Tom, Kite, 22 Palm Dr, Corner Brook, NL, A1G2W2, 709-665-9977, 3, YYN, YNN, NNN, Monthly, 2518.50, 367.03, 2023-08-01
+1037, 2023-07-29, Peter, Piper, 22 Browns Rd, Gander, NL, A1F4R6, 709-567-2323, 2, YY, YY, YY, Monthly, 2068.75, 302.38, 2023-08-01
+1038, 2023-07-29, Ronald, Mcdonald, 33 Torbay Rd, St Johns, NL, A1A2W2, 709-777-3434, 9, YYYYYYYYY, YYYYYYYYY, NNNNNNNNN, Full, 8027.00, 0.00, 2023-08-01
+1039, 2023-07-29, Bridget, Baker, 213 Maple Dr, Corner Brook, NL, A2S5G5, 709-345-2389, 1, N, N, N, Full, 869.00, 0.00, 2023-08-01
+1040, 2023-07-29, Mike, Brown, 76 Pine Rd, St Johns, NL, A1D3E3, 709-753-8723, 3, YYN, YYN, NNN, Monthly, 2604.50, 379.40, 2023-08-01
+1041, 2023-07-29, Wanda, Mitchell, 77 Knight St, Gander, NL, A1S3D3, 709-565-4455, 1, Y, Y, Y, Monthly, 1143.00, 169.31, 2023-08-01
+1042, 2023-07-29, Ron, Bass, 55 Pond Rd, Goulds, NL, A1S4F4, 709-576-3423, 1, Y, Y, Y, Full, 1143.00, 0.00, 2023-08-01
+1043, 2023-07-29, Donna, Jackson, 987 Water St, Carbonear, NL, A2D5G5, 709-596-6767, 2, YN, YN, YN, Monthly, 1794.75, 262.99, 2023-08-01
+1044, 2023-07-29, Jon, Black, 22 Main Rd, Lewisporte, NL, A2D4F4, 709-884-3322, 1, Y, N, N, Monthly, 999.00, 148.60, 2023-08-01
+1045, 2023-07-30, Hickman, Motors, 54 Kenmount Rd, St Johns, NL, A1A2W2, 709-754-7744, 9, NNNNNNNNN, NNNNNNNNN, NNNNNNNNN, Full, 6083.00, 0.00, 2023-08-01
