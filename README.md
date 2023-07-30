@@ -9,4 +9,4 @@ Program 2 is a program to graph sales performance over time (months).
 
 Updated py file for the main program to reflect multiple options for each car to be insured, incuding updated dat files for policies.
 
-Also, adding two (2) report programs to run with the main file as it updates the policies file. One is a detailed report which shows general customer information while the second report is a list of monthly payment listings.
+Also, for QAP5 adding two (2) report programs to run with the main file as it updates the policies file. One is a detailed report which shows general customer information while the second report is a list of monthly payment listings.
