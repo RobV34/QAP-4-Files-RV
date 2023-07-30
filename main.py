@@ -1,8 +1,7 @@
 # Invoice and Customer Data Program for One Stop Insurance
 # Written by: Rob Vatcher
-# Date: July 26th, 2023
+# Date: July 30th, 2023
 
-# Libraries
 import datetime
 import time
 from tqdm import tqdm
@@ -52,19 +51,20 @@ def save_policy(policy_data):
 
 def update_defaults(policy_number, base_premium, discount, liability_cost, glass_cost, loaner_cost, hst_rate, processing_fee):
     with open(DEFAULTS_FILE, "w") as f:
-        f.write(f"{policy_number}\n{base_premium}\n{discount}\n{liability_cost}\n{glass_cost}\n{loaner_cost}\n{hst_rate}\n{processing_fee}\n")
+        f.write(f"{policy_number}\n{base_premium}\n{discount}\n{liability_cost}\n{glass_cost}\n{loaner_cost}\n{hst_rate}\n{processing_fee}")
 
 
 def get_defaults():
     with open(DEFAULTS_FILE, "r") as f:
-        policy_number = int(f.readline())
-        base_premium = float(f.readline())
-        discount = float(f.readline())
-        liability_cost = float(f.readline())
-        glass_cost = float(f.readline())
-        loaner_cost = float(f.readline())
-        hst_rate = float(f.readline())
-        processing_fee = float(f.readline())
+        lines = f.readlines()
+        policy_number = int(lines[0].strip())
+        base_premium = float(lines[1].strip())
+        discount = float(lines[2].strip())
+        liability_cost = float(lines[3].strip())
+        glass_cost = float(lines[4].strip())
+        loaner_cost = float(lines[5].strip())
+        hst_rate = float(lines[6].strip())
+        processing_fee = float(lines[7].strip())
     return policy_number, base_premium, discount, liability_cost, glass_cost, loaner_cost, hst_rate, processing_fee
 
 
@@ -80,8 +80,8 @@ def format_receipt(policy_number, current_date, first_name, last_name, address, 
     receipt = "--------------------------------------\n"
     receipt += "       ONE STOP INSURANCE RECEIPT      \n"
     receipt += "--------------------------------------\n\n"
-    receipt += f"Policy Number: {policy_number:}\n"
-    receipt += f"Date: {format_date(current_date):}\n"
+    receipt += f"Policy Number: {policy_number}\n"
+    receipt += f"Date: {format_date(current_date)}\n"
     receipt += f"Name: {first_name} {last_name}\n"
     receipt += f"Address: {address}\n"
     receipt += f"City: {city}\n"
@@ -125,20 +125,18 @@ def format_receipt(policy_number, current_date, first_name, last_name, address, 
     receipt += "             COST SUMMARY          \n"
     receipt += "-----------------------------------------\n"
     receipt += f"Total Premium:               {'$'+format(total_premium, '.2f'):>12}\n"
-    receipt += f"HST:                          {'$'+format(total_premium * hst_rate, '.2f'):>11}\n"
+    receipt += f"HST:                          {'$' + format(total_premium * hst_rate, '.2f'):>11}\n"
     if payment_method == "Monthly":
         receipt += f"Processing Fee:                    ${processing_fee:.2f}\n"
     else:
         receipt += f"Processing Fee:                       N/A\n"
     receipt += "-----------------------------------------\n"
-    receipt += f"Total:                     {'$'+format(calculate_total_cost(total_premium, hst_rate, processing_fee, payment_method), '.2f'):>14}\n"
+    receipt += f"Total:                     {'$' + format(calculate_total_cost(total_premium, hst_rate, processing_fee, payment_method), '.2f'):>14}\n"
     receipt += "-----------------------------------------\n"
     receipt += "        THANK YOU FOR CHOOSING       \n"
     receipt += "           ONE STOP INSURANCE       \n"
     receipt += "-----------------------------------------\n"
     return receipt
-
-# Main Function
 
 
 def main():
@@ -165,9 +163,10 @@ def main():
         cars = int(input("Number of Cars Insured: "))
         cars = min(cars, 10)  # Limit the number of cars to 10
 
-        extra_liability = [input(f"Extra Liability for car {i+1} (Y/N): ").upper() == "Y" for i in range(cars)]
-        glass_coverage = [input(f"Glass Coverage for car {i+1} (Y/N): ").upper() == "Y" for i in range(cars)]
-        loaner_car = [input(f"Loaner Car for car {i+1} (Y/N): ").upper() == "Y" for i in range(cars)]
+        # Collect coverage options for each car
+        extra_liabilities = [input(f"Extra Liability for car {i+1} (Y/N): ").upper() == "Y" for i in range(cars)]
+        glass_coverages = [input(f"Glass Coverage for car {i+1} (Y/N): ").upper() == "Y" for i in range(cars)]
+        loaner_cars = [input(f"Loaner Car for car {i+1} (Y/N): ").upper() == "Y" for i in range(cars)]
 
         payment_method = input("Payment Method (Full/Monthly): ").title()
         while payment_method not in ["Full", "Monthly"]:
@@ -176,7 +175,7 @@ def main():
 
         # Calculations
         total_premium, car_costs, extra_liability_costs, glass_coverage_costs, loaner_car_costs = calculate_total_premium(
-            cars, extra_liability, glass_coverage, loaner_car, base_premium, discount, liability_cost, glass_cost,
+            cars, extra_liabilities, glass_coverages, loaner_cars, base_premium, discount, liability_cost, glass_cost,
             loaner_cost)
 
         total_cost = calculate_total_cost(total_premium, hst_rate, processing_fee, payment_method)
@@ -186,14 +185,14 @@ def main():
         next_payment_date = next_payment_date.replace(day=1)
 
         receipt = format_receipt(policy_number, datetime.datetime.now(), first_name, last_name, address, city, province,
-                                 postal_code, phone_number, cars, extra_liability, glass_coverage, loaner_car,
+                                 postal_code, phone_number, cars, extra_liabilities, glass_coverages, loaner_cars,
                                  payment_method, total_premium, base_premium, car_costs, extra_liability_costs,
                                  glass_coverage_costs, loaner_car_costs, discount, hst_rate, processing_fee, monthly_payment, next_payment_date)
 
         print("\nReceipt:\n")
         print(receipt)
 
-        policy_data = f"{policy_number}, {format_date(datetime.datetime.now())}, {first_name}, {last_name}, {address}, {city}, {province}, {postal_code}, {phone_number}, {cars}, {'Y' if extra_liability else 'N'}, {'Y' if glass_coverage else 'N'}, {'Y' if loaner_car else 'N'}, {payment_method}, {total_premium:.2f}, {monthly_payment:.2f}, {format_date(next_payment_date) if next_payment_date else 'N/A'}"
+        policy_data = f"{policy_number}, {format_date(datetime.datetime.now())}, {first_name}, {last_name}, {address}, {city}, {province}, {postal_code}, {phone_number}, {cars}, {''.join(['Y' if x else 'N' for x in extra_liabilities])}, {''.join(['Y' if x else 'N' for x in glass_coverages])}, {''.join(['Y' if x else 'N' for x in loaner_cars])}, {payment_method}, {total_premium:.2f}, {monthly_payment:.2f}, {format_date(next_payment_date) if next_payment_date else 'N/A'}"
         save_policy(policy_data)
 
         print()
@@ -215,8 +214,8 @@ def main():
             print("Program ended.")
             break
 
+# Run the main function
 
-if __name__ == "__main__":
-    main()
 
+main()
 
